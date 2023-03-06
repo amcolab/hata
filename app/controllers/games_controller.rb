@@ -8,6 +8,7 @@ class GamesController < ApplicationController
     if @user.save
       redirect_to answer_path
     else
+      flash[:error] = { user_login: @user.errors.messages }
       render :index, status: :unprocessable_entity
     end
   end
