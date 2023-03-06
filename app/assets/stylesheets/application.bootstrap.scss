@@ -1,2 +1,22 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-500 {
+  height: 500px;
+}
+
+.bg-blue {
+  background-color: #49b3c6;
+}
+
+.bg-dark-blue {
+  background-color: #134f5c;
+}
