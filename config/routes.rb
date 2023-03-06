@@ -3,4 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  root to: 'games#index'
+  post '/users', to: 'games#create_user'
+  get '/answer', to: 'games#answer_round'
 end

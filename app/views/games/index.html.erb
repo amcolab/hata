@@ -1,0 +1,20 @@
+<div class="row h-500 justify-content-center align-content-center bg-blue">
+  <%= form_for @user, html: { class: 'col-8' } do |f| %>
+    <h1 class="text-center fw-bold text-white mb-4">HATA</h1>
+    <div class="mb-3">
+      <%= f.text_field :name, class: 'form-control form-control-lg py-3', placeholder: 'ユーザー名' %>
+      <% flash.each do |type, msg| %>
+        <p class="mt-2 text-danger"><%= msg[:user_login][:name][0] if !msg[:user_login].nil? %></p>
+      <% end %>
+    </div>
+    <%= f.submit '入室する', class: 'form-control form-control-lg py-3 bg-dark-blue text-white' %>
+  <% end %>
+  <div class="row justify-content-center mt-4">
+    <div class="col-8">
+      <p class="text-white d-flex justify-content-end mx-3">
+        <span class="fs-2 mx-1">00</span>
+        <span class="align-self-center">人が入室中</span>
+      </p>
+    </div>
+  </div>
+</div>

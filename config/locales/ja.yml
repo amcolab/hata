@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: '店舗名が必要です。'
