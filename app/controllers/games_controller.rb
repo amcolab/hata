@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   def create_user
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to answer_path
     else
       flash[:error] = { user_login: @user.errors.messages }
