@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root to: 'games#index'
   post '/users', to: 'games#create_user'
   get '/answer', to: 'games#answer_round'
+  resources :answers, only: :update
 end

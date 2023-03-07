@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id            :bigint           not null, primary key
+#  content       :string           not null
+#  status        :integer          default("inactive")
+#  time_start    :datetime
+#  current_round :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
 class Question < ApplicationRecord
   has_many :answers
 
@@ -13,7 +25,7 @@ class Question < ApplicationRecord
           self.update_all(status: 'inactive', current_round: max_round + 1)
         end
         question = self.inactive.sample
-        question.update!(status: 'active', current_round: max_round || 1) if question
+        question.update!(status: 'active', current_round: max_round || 1, time_start: Time.now) if question
       end
       question
     end
