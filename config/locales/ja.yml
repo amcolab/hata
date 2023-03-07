@@ -3,9 +3,19 @@ ja:
     attributes:
       user:
         name:
+      answer:
+        content: '回答'
+        question_id: ''
     errors:
       models:
         user:
           attributes:
             name:
               blank: '店舗名が必要です。'
+        answer:
+          attributes:
+            content:
+              blank: 'を入力してください。'
+              too_long: 'は140字以内に入力してください。'
+            question_id:
+              taken: '回答済みです。'
