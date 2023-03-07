@@ -8,6 +8,10 @@ class AnswersController < ApplicationController
     end
   end
 
+  def get_assessment_path
+    render json: { redirect: assessment_path }
+  end
+
   private
 
   def answer_params

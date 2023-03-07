@@ -20,7 +20,7 @@ class Question < ApplicationRecord
   class << self
     def find_or_create_active_question
       unless question = self.active.first
-        max_round = self.maximum(:current_round)
+        max_round = self.maximum(:current_round) || 0
         unless self.inactive.exists?
           self.update_all(status: 'inactive', current_round: max_round + 1)
         end

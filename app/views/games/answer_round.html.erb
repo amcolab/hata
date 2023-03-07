@@ -1,0 +1,23 @@
+<%= javascript_include_tag "answer", "data-turbo-track": "reload", defer: true %>
+<div class="row h-500 bg-gray">
+  <div class="d-flex flex-column justify-content-between">
+    <%= render partial: 'templates/header', locals: { question: @answer.question } %>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <p class="fs-4 fw-bold m-0 mx-4">採点まで残り</p>
+        </div>
+        <% start_time = @answer.question.time_start.to_i %>
+        <%= render partial: 'templates/countdown', locals: { start_time: start_time } %>
+        <%= form_for @answer, url: update_answer_path(@answer), method: :put, remote: true, authenticity_token: true, html: { class: 'row justify-content-center', is_answered: !@answer.content.nil? } do |f| %>
+          <div class="col-11 col-sm-10 col-lg-8">
+            <%= f.text_area :content, class: 'form-control', rows: 7 %>
+            <div class="error text-center fw-bold text-danger mt-1"></div>
+            <%= f.submit 'submit', id: 'form-submit-button', class: 'd-none' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= render partial: 'templates/footer' %>
+  </div>
+</div>

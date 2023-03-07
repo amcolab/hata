@@ -11,6 +11,7 @@ class GamesController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       active_question = Question.find_or_create_active_question
+      active_question.update(time_start: Time.current) if active_question.time_start.nil?
       @user.answers.create!(question: active_question, status: 'active', round: active_question.current_round)
       redirect_to answer_path
     else
@@ -21,6 +22,11 @@ class GamesController < ApplicationController
 
   # Display answer the question screen
   def answer_round
+    @answer = current_user.answers.active.first
+  end
+
+  # Display assessment screen
+  def assessment_round
   end
 
   private
