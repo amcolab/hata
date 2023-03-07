@@ -10,9 +10,6 @@ class GamesController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      active_question = Question.find_or_create_active_question
-      active_question.update(time_start: Time.current) if active_question.time_start.nil?
-      @user.answers.create!(question: active_question, status: 'active', round: active_question.current_round)
       redirect_to answer_path
     else
       flash[:error] = { user_login: @user.errors.messages }
@@ -22,11 +19,23 @@ class GamesController < ApplicationController
 
   # Display answer the question screen
   def answer_round
-    @answer = current_user.answers.active.includes(:question)
+    active_question = Question.find_or_create_active_question
+    active_question.update(time_start: Time.current) if active_question.time_start.nil?
+    @answer = current_user.answers.create!(question: active_question, status: 'active', round: active_question.current_round)
   end
 
   # Display assessment screen
   def assessment_round
+  end
+
+  # Archived a question, after finish display result screen
+  def archived_question
+    active_question = Question.active.first
+    if active_question && params[:id].present? && active_question.id == params[:id].to_i
+      active_question.archived!
+      active_question.answers.active.update_all(status: 'archived')
+    end
+    redirect_to answer_round_path
   end
 
   private
