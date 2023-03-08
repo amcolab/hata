@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   root to: 'games#index'
   post '/users', to: 'games#create_user'
   get '/answer', to: 'games#answer_round'
-  resources :answers, only: :update
+  get '/assessment', to: 'games#assessment_round'
+  put '/answers/:id', to: 'answers#update', as: :update_answer
+  get '/get_assessments', to: 'answers#get_assessment_path', as: :move_to_assessment
 end

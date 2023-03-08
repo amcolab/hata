@@ -20,3 +20,16 @@
 .bg-dark-blue {
   background-color: #134f5c;
 }
+
+.bg-gray {
+  background-color: #eeeeee;
+}
+
+.btn:hover {
+  background-color: #134f5cd7;
+}
+
+.btn:disabled {
+  background-color: $success;
+  color: #134f5c;
+}
