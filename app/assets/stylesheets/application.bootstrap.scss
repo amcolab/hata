@@ -1,6 +1,10 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+.w-full {
+  width: 100%;
+}
+
 .h-full {
   height: 100%;
 }
@@ -15,6 +19,10 @@
 
 .bg-blue {
   background-color: #49b3c6;
+}
+
+.bg-pink {
+  background-color: #ea9999;
 }
 
 .bg-dark-blue {
@@ -32,4 +40,9 @@
 .btn:disabled {
   background-color: $success;
   color: #134f5c;
+}
+
+.border-dashed {
+  border: none;
+  border-bottom: 1px dashed !important;
 }
