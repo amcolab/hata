@@ -22,7 +22,7 @@ class GamesController < ApplicationController
 
   # Display answer the question screen
   def answer_round
-    @answer = current_user.answers.active.first
+    @answer = current_user.answers.active.includes(:question)
   end
 
   # Display assessment screen

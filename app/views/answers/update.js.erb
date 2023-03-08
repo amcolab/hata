@@ -1,4 +1,3 @@
 <% unless @success %>
-  console.log('<%= @message %>');
   $('#submit-button').attr('disabled', true).text('<%= @message %>');
 <% end %>
