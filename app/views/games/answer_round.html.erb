@@ -1,11 +1,11 @@
 <%= javascript_include_tag "answer", "data-turbo-track": "reload", defer: true %>
 <div class="row h-500 bg-gray">
-  <div class="d-flex flex-column justify-content-between">
+  <div class="col-12 position-relative">
     <%= render partial: 'templates/header', locals: { question:  @answer.first.question, screen: 'answer' } %>
     <div class="row">
       <div class="col-12">
         <div class="row">
-          <p class="fs-4 fw-bold m-0 mx-4">採点まで残り</p>
+          <p class="fs-4 fw-bold px-5 pt-4">採点まで残り</p>
         </div>
         <% start_time = @answer.first.question.time_start.to_i %>
         <%= render partial: 'templates/countdown', locals: { start_time: start_time } %>

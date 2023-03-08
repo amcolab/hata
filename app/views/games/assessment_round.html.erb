@@ -4,7 +4,8 @@
     <div class="row">
       <div class="col-12">
         <div class="row flex-row-reverse align-items-center border-dashed py-2">
-          <div class="col-2 fs-4 fw-bold">02:00</div>
+          <%# start_time = (@question.time_start + 2.mins).to_i %>
+          <%#= render partial: 'templates/countdown', locals: { start_time: start_time } %>
           <div class="col-5 fs-5 fw-bold text-end">採点終了まで残り</div>
         </div>
         <div class="row text-center mt-2">
