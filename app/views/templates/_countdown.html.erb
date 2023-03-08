@@ -1,7 +1,8 @@
 <div class="row">
-  <%= content_tag(:div, "Start!", class: 'text-center fs-3 fw-bold mb-4', data: {
+  <%= content_tag(:div, "Start!", class: 'text-center fs-3 fw-bold', data: {
     controller: "countdown",
     countdown_target: "countdown",
-    start_time_value: start_time
+    start_time_value: start_time,
+    redirect_path_value: redirect_path
   }) %>
 </div>

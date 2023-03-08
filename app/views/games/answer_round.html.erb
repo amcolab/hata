@@ -1,19 +1,19 @@
 <%= javascript_include_tag "answer", "data-turbo-track": "reload", defer: true %>
 <div class="row h-500 bg-gray">
   <div class="col-12 position-relative">
-    <%= render partial: 'templates/header', locals: { question: @answer.question } %>
+    <%= render partial: 'templates/header', locals: { question: @answer.question, screen: 'answer' } %>
     <div class="row">
       <div class="col-12">
         <div class="row">
           <p class="fs-4 fw-bold px-5 pt-4">採点まで残り</p>
         </div>
         <% start_time = @answer.question.time_start.to_i %>
-        <%= render partial: 'templates/countdown', locals: { start_time: start_time } %>
-        <%= form_for @answer, url: update_answer_path(@answer), method: :put, remote: true, authenticity_token: true, html: { class: 'row justify-content-center', is_answered: !@answer.content.nil? } do |f| %>
+        <%= render partial: 'templates/countdown', locals: { start_time: start_time, redirect_path: '/get_assessments' } %>
+        <%= form_for @answer, url: update_answer_path(@answer), method: :put, remote: true, authenticity_token: true, html: { class: 'row justify-content-center mt-4', is_answered: !@answer.content.nil?, screen: 'answer' } do |f| %>
           <div class="col-11 col-sm-10 col-lg-8">
             <%= f.text_area :content, class: 'form-control', rows: 7 %>
             <div class="error text-center fw-bold text-danger mt-1"></div>
-            <%= f.submit 'submit', id: 'form-submit-button', class: 'd-none' %>
+            <%= f.submit 'submit', class: 'form-submit-button d-none' %>
           </div>
         <% end %>
       </div>

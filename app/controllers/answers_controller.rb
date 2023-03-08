@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   def index
-    active_question = Question.active.first
-    @answers = active_question.answers.active.with_round(active_question.current_round)
-      .ordered_by_created_at
+    @active_question = Question.active.first
+    @answers = @active_question.answers.active.with_round(@active_question.current_round)
+      .ordered_answers_by_created_at
   end
 
   def update
@@ -15,7 +15,11 @@ class AnswersController < ApplicationController
   end
 
   def get_assessment_path
-    render json: { redirect: assessment_path }
+    render json: { redirect: answers_path }
+  end
+
+  def get_result_path
+    render json: { redirect: result_answers_path }
   end
 
   def aggregate_points
@@ -41,7 +45,7 @@ class AnswersController < ApplicationController
   def result
     active_question = Question.active.first
     @answers = active_question.answers.active.with_round(active_question.current_round)
-      .ordered_by_point.includes(:user)
+      .ordered_answers_by_point.includes(:user)
   end
 
   private

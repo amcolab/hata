@@ -29,8 +29,9 @@ export default class extends Controller {
   }
 
   redirect() {
+    this.redirectPath = this.countdownTarget.dataset.redirectPathValue;
     $.ajax({
-      url: window.location.origin + '/get_assessments',
+      url: window.location.origin + this.redirectPath,
       method: 'GET',
       dataType: 'json'
     })

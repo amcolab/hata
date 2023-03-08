@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   root to: 'games#index'
   post '/users', to: 'games#create_user'
   get '/answer', to: 'games#answer_round', as: :answer_round
-  get '/assessment', to: 'games#assessment_round'
   put '/answers/:id', to: 'answers#update', as: :update_answer
   get '/questions/:id/archived', to: 'games#archived_question', as: :archived_question
   get '/get_assessments', to: 'answers#get_assessment_path', as: :move_to_assessment
-  put '/assessments', to: 'assessments#create'
+  get '/get_results', to: 'answers#get_result_path', as: :move_to_result
   resources :answers, only: :index do
     post :aggregate_points, on: :collection
     get :result, on: :collection

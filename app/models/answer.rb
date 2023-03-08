@@ -20,13 +20,15 @@ class Answer < ApplicationRecord
   enum status: { active: 0, archived: 1 }
 
   scope :with_round, -> (round) { where(round: round) }
+  scope :ordered_answers_by_created_at, -> { order(:created_at) }
+  scope :ordered_answers_by_point, -> { order(:point) }
 
   validates :content, presence: true, on: :update
   validates :content, length: { maximum: 140 }, allow_blank: true
   validates :question_id, uniqueness: { scope: %i(user_id round) }
 
   def update_point!(point, assessment_user)
-    self.update!(total_point.to_i + point.to_i)
+    self.update!(total_point: total_point.to_i + point.to_i)
     self.assessments.create!(point: point, assessment_user_id: assessment_user.id)
   end
 end
