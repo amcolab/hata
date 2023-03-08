@@ -29,7 +29,6 @@ export default class extends Controller {
   }
 
   redirect() {
-    console.log(window.location.origin);
     $.ajax({
       url: window.location.origin + '/get_assessments',
       method: 'GET',
