@@ -24,4 +24,9 @@ class Answer < ApplicationRecord
   validates :content, presence: true, on: :update
   validates :content, length: { maximum: 140 }, allow_blank: true
   validates :question_id, uniqueness: { scope: %i(user_id round) }
+
+  def update_point!(point, assessment_user)
+    self.update!(total_point.to_i + point.to_i)
+    self.assessments.create!(point: point, assessment_user_id: assessment_user.id)
+  end
 end
