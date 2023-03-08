@@ -1,0 +1,31 @@
+<div class="row h-500 bg-gray">
+  <div class="col-12 position-relative">
+    <%= render partial: 'templates/header', locals: { question: @question, screen: 'assessment' } %>
+    <div class="row">
+      <div class="col-12">
+        <div class="row flex-row-reverse align-items-center border-dashed py-2">
+          <div class="col-2 fs-4 fw-bold">02:00</div>
+          <div class="col-5 fs-5 fw-bold text-end">採点終了まで残り</div>
+        </div>
+        <div class="row text-center mt-2">
+          <div class="col-2 fw-bold">2点</div>
+          <div class="col-2 fw-bold">1点</div>
+        </div>
+        <div class="row overflow-auto">
+          <div class="col-12">
+            <%= form_for @assessment do |f| %>
+              <% @question.answers.each do |answer| %>
+                <div class="row pb-2  align-items-center">
+                  <div class="col-2 text-center"><%= f.radio_button :point, 1, class: 'form-check-input fs-5' %></div>
+                  <div class="col-2 text-center"><%= f.radio_button :point, 2, class: 'form-check-input fs-5' %></div>
+                  <div class="col-8 py-2 border-dashed text-right"><%= answer.content %></div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'templates/footer', locals: { button_text: '採点する' } %>
+  </div>
+</div>

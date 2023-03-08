@@ -1,7 +1,7 @@
 <%= javascript_include_tag "answer", "data-turbo-track": "reload", defer: true %>
 <div class="row h-500 bg-gray">
   <div class="d-flex flex-column justify-content-between">
-    <%= render partial: 'templates/header', locals: { question: @answer.question } %>
+    <%= render partial: 'templates/header', locals: { question: @answer.question, screen: 'answer' } %>
     <div class="row">
       <div class="col-12">
         <div class="row">
@@ -18,6 +18,6 @@
         <% end %>
       </div>
     </div>
-    <%= render partial: 'templates/footer' %>
+    <%= render partial: 'templates/footer', locals: { button_text: '回答する' } %>
   </div>
 </div>

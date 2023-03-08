@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get '/assessment', to: 'games#assessment_round'
   put '/answers/:id', to: 'answers#update', as: :update_answer
   get '/get_assessments', to: 'answers#get_assessment_path', as: :move_to_assessment
+  put '/assessments', to: 'assessments#create'
 end

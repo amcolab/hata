@@ -27,6 +27,8 @@ class GamesController < ApplicationController
 
   # Display assessment screen
   def assessment_round
+    @question = Question.find_or_create_active_question
+    @assessment = Assessment.new()
   end
 
   private
