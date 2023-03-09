@@ -20,7 +20,7 @@
                       <div class="col-2 fs-5 text-end <%= set_ranking_text_color[index] %>"><%= index + 1 %>位</div>
                       <div class="col-10 p-0">(<%= point.to_i %>ポイント)</div>
                     </div>
-                    <% @answers.where(total_point: point).each do |answer| %>
+                    <% @answers.to_a.select{|answer| answer.total_point == point}.each do |answer| %>
                       <% unless answer.content.nil? %>
                         <div class="row justify-content-center mt-2">
                           <div class="col-8 text-break">

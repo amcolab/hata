@@ -27,11 +27,7 @@ class GamesController < ApplicationController
   def answer_round
     active_question = Question.active.first
     active_question.update(time_start: Time.current) if active_question.time_start.nil?
-    @answer = if current_user.answers.active.find_by(round: active_question.current_round).nil?
-      current_user.answers.create!(question: active_question, status: 'active', round: active_question.current_round)
-    else
-      current_user.answers.active.find_by(round: active_question.current_round)
-    end
+    @answer = current_user.answers.active.find_by(round: active_question.current_round) || current_user.answers.create!(question: active_question, status: 'active', round: active_question.current_round)
   end
 
   # Archived a question, after finish display result screen
