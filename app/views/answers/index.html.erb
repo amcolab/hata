@@ -1,9 +1,9 @@
 <%= javascript_include_tag "answer", "data-turbo-track": "reload", defer: true %>
 <div class="row h-500 bg-gray">
-  <div class="col-12 position-relative">
+  <div class="col-12 h-full position-relative">
     <%= render partial: 'templates/header', locals: { question: @active_question, screen: 'assessment' } %>
-    <div class="row">
-      <div class="col-12">
+    <div class="row" style="height: 438px">
+      <div class="col-12 h-full">
         <div class="row flex-row-reverse align-items-center border-dashed py-2">
           <div class="col-2">
             <% start_time = (@active_question.time_start + 2.minute).to_i %>
@@ -15,19 +15,19 @@
           <div class="col-2 fw-bold">2点</div>
           <div class="col-2 fw-bold">1点</div>
         </div>
-        <div class="row overflow-auto">
+        <div class="row overflow-y-auto" style="height: 290px">
           <div class="col-12">
             <%= form_with url: aggregate_points_answers_path, method: :post, html: { remote: true, screen: 'assessment', is_answered: false }, authenticity_token: true do |f| %>
               <% @answers.each do |answer| %>
                 <% unless answer.content.nil? %>
-                  <div class="row pb-2  align-items-center">
+                  <div class="row pb-3  align-items-center">
                     <div class="col-2 text-center">
                       <input type="radio" name="points[<%= answer.id %>]" value="2" class="form-check-input fs-5">
                     </div>
                     <div class="col-2 text-center">
                       <input type="radio" name="points[<%= answer.id %>]" value="1" class="form-check-input fs-5">
                     </div>
-                    <div class="col-8 py-2 border-dashed text-right"><%= answer.content %></div>
+                    <div class="col-8 py-3 border-dashed text-right text-break"><%= answer.content %></div>
                   </div>
                 <% end %>
               <% end %>

@@ -43,9 +43,9 @@ class AnswersController < ApplicationController
   end
 
   def result
-    active_question = Question.active.first
-    @answers = active_question.answers.active.with_round(active_question.current_round)
-      .ordered_answers_by_point.includes(:user)
+    @active_question = Question.active.first
+    @points = @active_question.answers.pluck(:total_point).uniq.sort_by { |a| -a.to_i }
+    @answers = @active_question.answers.active.with_round(@active_question.current_round).includes(:user)
   end
 
   private
