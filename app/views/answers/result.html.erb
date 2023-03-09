@@ -1,1 +1,46 @@
-
+<div class="row h-500 bg-gray">
+  <div class="col-12 h-full position-relative">
+    <%= render partial: 'templates/header', locals: { question: @active_question, screen: 'ranking' } %>
+    <div class="row">
+      <div class="col-12">
+        <div class="row flex-row-reverse align-items-center border-dashed py-2">
+          <div class="col-3">
+            <% start_time = (@active_question.time_start + 4.minute).to_i %>
+            <%= render partial: 'templates/countdown', locals: { start_time: start_time, redirect_path: "/questions/#{@active_question.id}/archived" } %>
+          </div>
+          <div class="col-5 fs-5 fw-bold">次のお題まで残り</div>
+        </div>
+        <div class="row overflow-auto" style='height: 375px !important'>
+          <div class="col-12">
+            <% @points.each_with_index do |point, index| %>
+              <div class="row">
+                <div class="col-12">
+                  <div class="col-12 border-dashed py-3">
+                    <div class="row align-items-center fw-bold">
+                      <div class="col-2 fs-5 text-end <%= set_ranking_text_color[index] %>"><%= index + 1 %>位</div>
+                      <div class="col-10 p-0">(<%= point.to_i %>ポイント)</div>
+                    </div>
+                    <% @answers.to_a.select{|answer| answer.total_point == point}.each do |answer| %>
+                      <% unless answer.content.nil? %>
+                        <div class="row justify-content-center mt-2">
+                          <div class="col-8 text-break">
+                            <%= answer&.content %>
+                          </div>
+                        </div>
+                        <div class="row flex-row-reverse">
+                          <div class="col-4">
+                            <%= answer&.user.name %>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
