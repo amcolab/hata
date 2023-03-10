@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :check_user_exists, only: [:index]
   # Access to regist user screen
   def index
     count_joined_room_users
@@ -53,5 +54,17 @@ class GamesController < ApplicationController
 
   def find_or_create_active_question
     Question.find_or_create_active_question
+  end
+
+  def check_user_exists
+    if current_user
+      active_question = find_or_create_active_question
+      if (active_question.time_start + 4.minute) < Time.current
+        redirect_to result_answers_path and return
+      elsif (active_question.time_start + 2.minute) < Time.current
+        redirect_to answers_path and return
+      end
+      redirect_to answer_round_path
+    end
   end
 end
