@@ -6,9 +6,12 @@ class AnswersController < ApplicationController
   end
 
   def update
-    current_answer = Answer.find_by(user_id: current_user.id, question_id: Question.active.first)
-    @success = current_answer && current_answer.update(answer_params)
-    @message = current_answer.errors.full_messages.first unless @success
+    current_answer = Answer.active.find_by(user_id: current_user.id, question_id: Question.active.first)
+    if current_answer && current_answer.content.nil?
+      current_answer.update(answer_params)
+    else
+      @message = '回答済みのお題を再度回答出来ません。'
+    end
     respond_to do |format|
       format.js
     end
@@ -44,7 +47,7 @@ class AnswersController < ApplicationController
 
   def result
     @active_question = Question.active.first
-    @points = @active_question.answers.pluck(:total_point).uniq.sort_by { |a| -a.to_i }
+    @points = @active_question.answers.active.pluck(:total_point).uniq.sort_by { |a| -a.to_i }
     @answers = @active_question.answers.active.with_round(@active_question.current_round).includes(:user)
   end
 

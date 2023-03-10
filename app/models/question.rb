@@ -25,7 +25,7 @@ class Question < ApplicationRecord
           self.update_all(status: 'inactive', current_round: max_round.to_i + 1)
         end
         question = self.inactive.sample
-        question.update!(status: 'active', current_round: max_round || 1, time_start: Time.now) if question
+        question.update!(status: 'active', time_start: Time.now) if question
       end
       question
     end

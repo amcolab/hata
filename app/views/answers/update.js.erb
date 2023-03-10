@@ -1,3 +1,3 @@
-<% unless @success %>
-  $('#submit-button').attr('disabled', true).text('<%= @message %>');
+<% unless @message.nil? %>
+  $('.submit-button').attr('disabled', true).text('<%= @message %>');
 <% end %>
