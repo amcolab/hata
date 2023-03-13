@@ -5,7 +5,7 @@ $(() => {
       assessment_round_validation()
       $('.form-submit-button').trigger('click');
       $('form').attr('is_answered', true);
-      $('.submit-button').attr('disabled', true).text('採点済みのお題を再度採点出来ません。');
+      $('.submit-button').attr('disabled', true).text('採点が完了しました。');
     } else {
       answer_round_validation();
     }
@@ -20,6 +20,8 @@ $(() => {
       if (content.val().length > 140) {
         content.val('');
         error.text('回答は140字以内に入力してください。');
+      } else if (content.val() === '') {
+        error.text('回答を入力してください。');
       } else {
         $('.form-submit-button').trigger('click');
         $('form').attr('is_answered', true);
@@ -41,6 +43,8 @@ $(() => {
         radios.each((index, radio) => {
           if ($(radio).val() === answer_point) {
             $(radio).trigger('click');
+          } else {
+            $(radio).prop('checked', false);
           }
         })
       }
@@ -59,4 +63,8 @@ $(() => {
         $('#answer_content').css({ 'box-shadow': '', 'border-color': '#ced4da' });
       }
     });
+
+  $('.points').on('dblclick', (e) => {
+    $(e.currentTarget).prop('checked', false);
+  });
 });
