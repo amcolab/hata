@@ -5,7 +5,7 @@ $(() => {
       assessment_round_validation()
       $('.form-submit-button').trigger('click');
       $('form').attr('is_answered', true);
-      $('.submit-button').attr('disabled', true).text('採点済みのお題を再度採点出来ません。');
+      $('.submit-button').attr('disabled', true).text('採点が完了しました。');
     } else {
       answer_round_validation();
     }

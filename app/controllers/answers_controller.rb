@@ -30,7 +30,7 @@ class AnswersController < ApplicationController
     answer_ids = params[:points].keys
     if Assessment.by_assessment_user_id(current_user.id).by_answer_id(answer_ids).exists?
       @success = false
-      @message = '採点済みのお題を再度採点出来ません。'
+      @message = '採点が完了しました。'
     else
       params[:points].each do |answer_id, point|
         answer = Answer.active.find_by_id(answer_id)
