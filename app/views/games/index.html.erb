@@ -1,6 +1,3 @@
-<% if Rails.env.production? %>
-  <div class="row"><%= render 'layouts/shared/google_ads' %></div>
-<% end %>
 <div class="row h-500 justify-content-center align-content-center bg-blue">
   <%= form_for @user, html: { class: 'col-8' } do |f| %>
     <h1 class="text-center fw-bold text-white mb-4">HATA</h1>
@@ -21,6 +18,3 @@
     </div>
   </div>
 </div>
-<% if Rails.env.production? %>
-  <div class="row"><%= render 'layouts/shared/google_ads' %></div>
-<% end %>
