@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" <%= 'style="margin-top: 150px"' if screen == "ranking" %>>
   <div class="col-2 d-flex justify-content-center <%= screen.include?('answer') ? 'bg-blue' : 'bg-pink' %> py-3">
     <div class="row align-content-center ">
       <p class="text-center m-0 text-white fs-5 fw-bold"><%= set_screen_header_text[screen] %></p>
