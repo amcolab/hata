@@ -1,5 +1,6 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+@import './common';
 
 .w-full {
   width: 100%;
@@ -61,4 +62,8 @@
 .border-dashed {
   border: none;
   border-bottom: 1px dashed !important;
+}
+
+.pre-whitespace {
+  white-space: pre !important;
 }

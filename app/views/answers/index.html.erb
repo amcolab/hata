@@ -19,17 +19,17 @@
         <% end %>
         <div class="row">
           <div class="col-12">
-            <%= form_with url: aggregate_points_answers_path, method: :post, html: { remote: true, screen: 'assessment', is_answered: false }, authenticity_token: true do |f| %>
+            <%= form_with url: aggregate_points_answers_path, method: :post, html: { remote: true, screen: 'assessment', is_answered: @aggregated }, authenticity_token: true do |f| %>
               <% @answers.each do |answer| %>
                 <% unless answer.content.nil? %>
                   <div class="row pb-3  align-items-center">
                     <div class="col-2 text-center">
-                      <input type="radio" name="points[<%= answer.id %>]" value="2" class="form-check-input fs-5" <%= 'checked' if answer.assessments.by_assessment_user_id(current_user.id).first&.point == 2 %>>
+                      <input type="radio" name="points[<%= answer.id %>]" value="2" class="form-check-input fs-5 points" <%= 'checked' if answer.assessments.by_assessment_user_id(current_user.id).first&.point == 2 %>>
                     </div>
                     <div class="col-2 text-center">
-                      <input type="radio" name="points[<%= answer.id %>]" value="1" class="form-check-input fs-5" <%= 'checked' if answer.assessments.by_assessment_user_id(current_user.id).first&.point == 1 %>>
+                      <input type="radio" name="points[<%= answer.id %>]" value="1" class="form-check-input fs-5 points" <%= 'checked' if answer.assessments.by_assessment_user_id(current_user.id).first&.point == 1 %>>
                     </div>
-                    <div class="col-8 py-3 border-dashed text-right text-break answer_content" answer_id="<%= answer.id %>" answer_point="<%= answer.assessments&.first&.point %>" ><%= answer.content %></div>
+                    <div class="col-8 py-3 border-dashed text-right text-break answer_content pre-whitespace" answer_id="<%= answer.id %>" answer_point="<%= answer.assessments&.first&.point %>"><%= answer.content %></div>
                   </div>
                 <% end %>
               <% end %>
