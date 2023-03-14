@@ -19,7 +19,7 @@
         <% end %>
         <div class="row">
           <div class="col-12">
-            <%= form_with url: aggregate_points_answers_path, method: :post, html: { remote: true, screen: 'assessment', is_answered: true }, authenticity_token: true do |f| %>
+            <%= form_with url: aggregate_points_answers_path, method: :post, html: { remote: true, screen: 'assessment', is_answered: @aggregated }, authenticity_token: true do |f| %>
               <% @answers.each do |answer| %>
                 <% unless answer.content.nil? %>
                   <div class="row pb-3  align-items-center">

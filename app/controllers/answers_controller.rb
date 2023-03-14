@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
     @active_question = Question.active.first
     @answers = @active_question.answers.active.with_round(@active_question.current_round)
       .ordered_answers_by_created_at
+    @aggregated = Assessment.by_assessment_user_id(current_user.id).by_answer_id(@answers.pluck(:id)).exists?
   end
 
   def update
@@ -27,12 +28,12 @@ class AnswersController < ApplicationController
 
   def aggregate_points
     # points param format: {points: {answer_id1: point1, answer_id2: point2, answer_id3: point3}}
-    answer_ids = params[:points].keys
+    answer_ids = params[:points]&.keys
     if Assessment.by_assessment_user_id(current_user.id).by_answer_id(answer_ids).exists?
       @success = false
       @message = '採点が完了しました。'
     else
-      params[:points].each do |answer_id, point|
+      (params[:points] || {}).each do |answer_id, point|
         answer = Answer.active.find_by_id(answer_id)
         next unless answer
         answer.update_point!(point, current_user)
